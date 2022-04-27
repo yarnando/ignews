@@ -4,7 +4,7 @@ import Home, { getStaticProps } from '../../pages'
 import { stripe } from '../../services/stripe'
 
 jest.mock('next/router')
-jest.mock('next-auth/client', () => {
+jest.mock('next-auth/react', () => {
     return {
         useSession: () => ({data: null, status: "unauthenticated"})
     }
