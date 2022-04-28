@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "stripe": "stripe-cli/stripe listen  --forward-to localhost:3000/api/webhooks"
+    "stripe": "stripe-cli/stripe listen  --forward-to localhost:3000/api/webhooks",
+    "test": "jest",
+    "testCoverage": "jest --coverage --no-cache"
   },
   "dependencies": {
     "@prismicio/client": "5.1.1",
