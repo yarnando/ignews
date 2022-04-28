@@ -1,10 +1,11 @@
-import NextAuth from "next-auth"
+import NextAuth, { User as NextAuthUser } from 'next-auth'
 import GithubProvider from "next-auth/providers/github"
 
 import { query as q } from "faunadb"
 import { fauna } from '../../../services/fauna'
 
 export default NextAuth({
+  secret: process.env.NEXTAUTH_SECRET,
   // Configure one or more authentication providers
   providers: [
     GithubProvider({
@@ -12,14 +13,14 @@ export default NextAuth({
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
       authorization: {
         params: {
-          scope: 'read:user'
+          scope: 'read:user, user:email',
         }
-      }
+      },
     }),
   ],
-  // jwt: {
-  //   signingKey: process.env.SIGNIN_KEY
-  // },
+  jwt: {
+    secret: process.env.SIGNIN_KEY
+  },
   callbacks: {
     async session({ session }) {
 
@@ -45,22 +46,23 @@ export default NextAuth({
               )
             ]),
           )
-        )   
-        
+        )
+
         return {
           ...session,
           activeSubscription: userActiveSubscription
-        }          
+        }
       } catch (error) {
         return {
           ...session,
           activeSubscription: null
-        }   
+        }
       }
 
     },
     async signIn({ user, account, profile }) {
       const { email } = user
+      
 
       try {
         await fauna.query(
@@ -97,6 +99,7 @@ export default NextAuth({
 
       } catch (error) {
 
+        console.log(error) // Faz o log do erro
         return false
 
       }

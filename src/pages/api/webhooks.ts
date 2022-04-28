@@ -76,6 +76,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                 }
             } catch (err) {
                 // nao pode retornar status de erro porque o stripe vai ficar tentando pra sempre
+                console.log('Erro do stripe >>');
+                console.log('Erro do stripe >>');
+                
                 return res.json({ error: 'Webhook handler failed' })
             }
         }
