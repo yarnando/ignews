@@ -27,6 +27,8 @@ describe('Header component', () => {
         render(
             <Header/>
         )
+
+        screen.logTestingPlaygroundURL()
     
         //se quiser dar um console.log do que foi renderizado
         // debug()
