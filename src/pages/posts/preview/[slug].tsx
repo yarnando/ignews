@@ -62,7 +62,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     return {
         paths: [ 
             {
-                params: { slug: 'para--manter-a-sua-casa-sempre-limpa-e-cheirosa-a' }
+                params: { slug: 'react-v18' }
             }
         ],//quais posts quero gerar durante a build? nesse caso, todos
         fallback: 'blocking'
